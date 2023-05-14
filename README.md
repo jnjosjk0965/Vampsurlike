@@ -23,9 +23,10 @@
 
 			x = (cx + r * Math.cos(theta));
 			y = (cy + r * Math.sin(theta));
+			cx += vx;
+			cy += vy;
 
 //			vx = -r * omega * Math.sin(theta);
 //			vy = r * omega * Math.cos(theta);
 
-			cx += vx;
-			cy += vy;
+
