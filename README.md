@@ -26,7 +26,7 @@
 			cx += vx;
 			cy += vy;
 
-//			vx = -r * omega * Math.sin(theta);
-//			vy = r * omega * Math.cos(theta);
+//			vx = -r * omega * Math.sin(theta);      
+//			vy = r * omega * Math.cos(theta);     
 
 
