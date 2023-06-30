@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -9,37 +10,43 @@ public class Player : MonoBehaviour
     [SerializeField] int currentHealth;
     [SerializeField] HealthBar healthBar;
     // Players speed
-    [SerializeField] float playerMoveSpeed;
-    void Start()
-    {
+    [SerializeField] float playerSpeed;
+    [SerializeField] Vector2 inputVec;
+    Rigidbody2D rigid;
+    SpriteRenderer spriteRenderer;
+    Animator anime;
+    void Awake() {
+        rigid = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        anime = GetComponent<Animator>();
+    }
+    void Start() {
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
     }
-
+    private void FixedUpdate() {
+        Vector2 nextVec = inputVec * playerSpeed * Time.fixedDeltaTime;
+        rigid.MovePosition(rigid.position + nextVec);
+    }
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if(Input.GetKeyDown(KeyCode.Space)){
             TakeDamage(20);
         }
-        if(Input.GetKey(KeyCode.W)){
-            float moveAmount = playerMoveSpeed * Time.deltaTime;
-            transform.Translate(0,moveAmount,0);
-        }else if(Input.GetKey(KeyCode.S)){
-            float moveAmount = playerMoveSpeed * Time.deltaTime;
-            transform.Translate(0,-moveAmount,0);
-        }
-        if(Input.GetKey(KeyCode.D)){
-            float moveAmount = playerMoveSpeed * Time.deltaTime;
-            transform.Translate(moveAmount,0,0);
-        }else if(Input.GetKey(KeyCode.A)){
-            float moveAmount = playerMoveSpeed * Time.deltaTime;
-            transform.Translate(-moveAmount,0,0);
+    }
+    private void LateUpdate() {
+        anime.SetFloat("Speed", inputVec.magnitude);
+        if(inputVec.x != 0){
+            spriteRenderer.flipX = inputVec.x < 0;
         }
     }
-
-    void TakeDamage(int Damage){
+    void OnMove(InputValue value) {
+        inputVec = value.Get<Vector2>();
+    }
+    void TakeDamage(int Damage) {
         currentHealth -= Damage;
         healthBar.SetHealth(currentHealth);
     }
+
+    
 }
