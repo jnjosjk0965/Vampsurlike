@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] HealthBar healthBar;
     // Players speed
     [SerializeField] float playerSpeed;
-    [SerializeField] Vector2 inputVec;
+    public Vector2 inputVec;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anime;

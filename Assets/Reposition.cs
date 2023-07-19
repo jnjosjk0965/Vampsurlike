@@ -24,10 +24,10 @@ public class Reposition : MonoBehaviour
             case "Ground":
                 if (diffx > diffy)
                 {
-                    transform.Translate(Vector3.right * dirX * 40);
+                    transform.Translate(Vector3.right * dirX * 60);
                 } else if (diffx < diffy)
                 {
-                    transform.Translate(Vector3.up * dirY * 40);
+                    transform.Translate(Vector3.up * dirY * 60);
                 }
                 break;
             case "Enemy":
