@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void OnClickNewGame(){
-        Debug.Log("새 게임");
+        SceneManager.LoadScene("BattleScene");
     }
 
     public void OnClickLoad(){
@@ -28,7 +29,7 @@ public class MainMenu : MonoBehaviour
         Debug.Log("옵션");
     }
 
-    public void OnClickQuit(){
+    public void OnClickExit(){
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #else
